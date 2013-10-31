@@ -17,12 +17,5 @@
     "jshint": "~2.3.0",
     "uglify-js": "~2.4.1"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vash15/iscroll.git"
-  },
-  "bugs": {
-    "url": "https://github.com/cubiq/iscroll/issues"
-  },
   "license": "MIT"
 }
