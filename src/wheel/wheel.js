@@ -1,11 +1,11 @@
 
 	_initWheel: function () {
 		utils.addEvent(this.wrapper, 'mousewheel', this);
-		utils.addEvent(this.wrapper, 'DOMMouseScroll', this);
+		utils.addEvent(this.wrapper, 'wheel', this);
 
 		this.on('destroy', function () {
 			utils.removeEvent(this.wrapper, 'mousewheel', this);
-			utils.removeEvent(this.wrapper, 'DOMMouseScroll', this);
+			utils.removeEvent(this.wrapper, 'wheel', this);
 		});
 	},
 
