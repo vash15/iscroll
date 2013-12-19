@@ -117,6 +117,13 @@ var utils = (function () {
 	};
 
 	me.offset = function (el) {
+		
+		return {
+			left: el.getBoundingClientRect().left * -1,
+			top: el.getBoundingClientRect().top * -1
+		};
+
+		/*
 		var left = -el.offsetLeft,
 			top = -el.offsetTop;
 
@@ -131,6 +138,7 @@ var utils = (function () {
 			left: left,
 			top: top
 		};
+		*/
 	};
 
 	me.preventDefaultException = function (el, exceptions) {
