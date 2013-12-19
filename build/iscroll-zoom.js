@@ -1172,6 +1172,9 @@ IScroll.prototype = {
 			return;
 		}
 
+		// BugFix, a volte ritorna NaN e blocca lo zoom
+		if ( !wheelDeltaY || wheelDeltaY == NaN ) wheelDeltaY = 0;
+
 		deltaScale = this.scale + wheelDeltaY / 5;
 
 		this.zoom(deltaScale, e.pageX, e.pageY, 0);
