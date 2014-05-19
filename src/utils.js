@@ -45,12 +45,13 @@ var utils = (function () {
 		el.removeEventListener(type, fn, !!capture);
 	};
 
-	me.momentum = function (current, start, time, lowerMargin, wrapperSize) {
+	me.momentum = function (current, start, time, lowerMargin, wrapperSize, deceleration) {
 		var distance = current - start,
 			speed = Math.abs(distance) / time,
 			destination,
-			duration,
-			deceleration = 0.0006;
+			duration;
+
+		deceleration = deceleration === undefined ? 0.0006 : deceleration;
 
 		destination = current + ( speed * speed ) / ( 2 * deceleration ) * ( distance < 0 ? -1 : 1 );
 		duration = speed / deceleration;
@@ -82,7 +83,7 @@ var utils = (function () {
 	});
 
 	// This should find all Android browsers lower than build 535.19 (both stock browser and webview)
-	me.isBadAndroid = /Android/.test(window.navigator.appVersion) && !(/Chrome\/\d/.test(window.navigator.appVersion));
+	me.isBadAndroid = /Android /.test(window.navigator.appVersion) && !(/Chrome\/\d/.test(window.navigator.appVersion));
 
 	me.extend(me.style = {}, {
 		transform: _transform,
@@ -117,13 +118,6 @@ var utils = (function () {
 	};
 
 	me.offset = function (el) {
-		
-		return {
-			left: el.getBoundingClientRect().left * -1,
-			top: el.getBoundingClientRect().top * -1
-		};
-
-		/*
 		var left = -el.offsetLeft,
 			top = -el.offsetTop;
 
@@ -138,7 +132,6 @@ var utils = (function () {
 			left: left,
 			top: top
 		};
-		*/
 	};
 
 	me.preventDefaultException = function (el, exceptions) {
@@ -225,7 +218,7 @@ var utils = (function () {
 		var target = e.target,
 			ev;
 
-		if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA') {
+		if ( !(/(SELECT|INPUT|TEXTAREA)/i).test(target.tagName) ) {
 			ev = document.createEvent('MouseEvents');
 			ev.initMouseEvent('click', true, true, e.view, 1,
 				target.screenX, target.screenY, target.clientX, target.clientY,

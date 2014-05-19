@@ -1,7 +1,6 @@
 
 	_initIndicators: function () {
 		var interactive = this.options.interactiveScrollbars,
-			defaultScrollbars = typeof this.options.scrollbars != 'object',
 			customStyle = typeof this.options.scrollbars != 'string',
 			indicators = [],
 			indicator;
@@ -18,7 +17,7 @@
 					interactive: interactive,
 					defaultScrollbars: true,
 					customStyle: customStyle,
-					resize: this.options.resizeIndicator,
+					resize: this.options.resizeScrollbars,
 					shrink: this.options.shrinkScrollbars,
 					fade: this.options.fadeScrollbars,
 					listenX: false
@@ -35,7 +34,7 @@
 					interactive: interactive,
 					defaultScrollbars: true,
 					customStyle: customStyle,
-					resize: this.options.resizeIndicator,
+					resize: this.options.resizeScrollbars,
 					shrink: this.options.shrinkScrollbars,
 					fade: this.options.fadeScrollbars,
 					listenY: false
