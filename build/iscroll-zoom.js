@@ -1,4 +1,4 @@
-/*! iScroll v5.1.1 ~ (c) 2008-2014 Matteo Spinelli ~ http://cubiq.org/license */
+/*! iScroll v5.1.2 ~ (c) 2008-2014 Matteo Spinelli ~ http://cubiq.org/license */
 (function (window, document, Math) {
 var rAF = window.requestAnimationFrame	||
 	window.webkitRequestAnimationFrame	||
@@ -120,19 +120,9 @@ var utils = (function () {
 	};
 
 	me.offset = function (el) {
-		var left = -el.offsetLeft,
-			top = -el.offsetTop;
-
-		// jshint -W084
-		while (el = el.offsetParent) {
-			left -= el.offsetLeft;
-			top -= el.offsetTop;
-		}
-		// jshint +W084
-
 		return {
-			left: left,
-			top: top
+			left: el.getBoundingClientRect().left * -1,
+			top: el.getBoundingClientRect().top * -1
 		};
 	};
 
@@ -327,7 +317,7 @@ function IScroll (el, options) {
 }
 
 IScroll.prototype = {
-	version: '5.1.1',
+	version: '5.1.2',
 
 	_init: function () {
 		this._initEvents();
@@ -1175,6 +1165,9 @@ IScroll.prototype = {
 		} else {
 			return;
 		}
+
+		// BugFix, a volte ritorna NaN e blocca lo zoom
+		if ( !wheelDeltaY || isNaN(wheelDeltaY) ) wheelDeltaY = 0;
 
 		deltaScale = this.scale + wheelDeltaY / 5;
 

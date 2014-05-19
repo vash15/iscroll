@@ -118,19 +118,9 @@ var utils = (function () {
 	};
 
 	me.offset = function (el) {
-		var left = -el.offsetLeft,
-			top = -el.offsetTop;
-
-		// jshint -W084
-		while (el = el.offsetParent) {
-			left -= el.offsetLeft;
-			top -= el.offsetTop;
-		}
-		// jshint +W084
-
 		return {
-			left: left,
-			top: top
+			left: el.getBoundingClientRect().left * -1,
+			top: el.getBoundingClientRect().top * -1
 		};
 	};
 
